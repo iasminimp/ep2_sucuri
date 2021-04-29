@@ -35,7 +35,7 @@ void empilha(Pilha *p, Objeto *no) { /*push*/
 
     if(!p||!no){
        return;
-   } if(!filaVazia(p)){ /*ou (p->fim ==NULL)*/
+   } if(!pilhaVazia(p)){ /*ou (p->fim ==NULL)*/
         p->inicio = p->fim = no;
    }else{
         p->fim->proximo = no;

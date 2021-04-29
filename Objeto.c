@@ -14,15 +14,45 @@ Objeto *criaObjeto() {
 
 /* Retorna uma cópia do objeto */
 Objeto *copiaObjeto(Objeto *obj) {
-    AVISO(Objeto.c: ainda não completei a função 'copiaObjeto');
-    
-    return NULL;
+    //AVISO(Objeto.c: ainda não completei a função 'copiaObjeto');
+    if (obj == NULL){ //Objeto vazio
+        return NULL;
+    }
+    Objeto *copia_obj = NULL; //copia do objeto, recebe o VALOR do OBJ
+    copia_obj = mallocSafe(sizeof(Objeto));
+ 
+    copia_obj->categoria = obj->categoria;
+    copia_obj->proximo = obj->proximo;
+
+    //verificacção da categoria
+    if (obj->categoria == INT ){ //Inteiro (12)
+       copia_obj->valor.vInt =  obj->valor.vInt;
+    }else if (obj->categoria == FLOAT){ //Float (11)
+        copia_obj->valor.vFloat = obj->valor.vFloat;
+    }else{ //string
+        copia_obj->valor.pStr = obj->valor.pStr;  
+    }    
+    return copia_obj;
 }
 
 void liberaObjeto(Objeto *o) {
-//    if (o->valor.pStr != NULL)
-//        free(o->valor.pStr);
+/*   if (o->valor.pStr != NULL)
+        free(o->valor.pStr);*/
+//        free(o->categoria);
+    free(o);   
+/*
+    while(o){
+        Objeto *tmp = o->valor;
+        if (o->valor.pStr != NULL){
+            free(o->valor.pStr);
+            o = tmp;
+        }else{
+            o = tmp;
+        }
+    }
     free(o);
+    o = NULL;
+*/
 }
 
 /*Imprime as informação do objeto de acordo com o 'tipo' (Util.h)*/

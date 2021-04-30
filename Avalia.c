@@ -13,7 +13,7 @@
 Objeto *avalia(Fila *posFixa) {
     AVISO(Avalia.c: ainda não completei a função 'avalia');
 
-//recebe uma la (posFixa) de objetos na notação pós-xa.
+    //recebe uma fila (posFixa) de objetos na notação pós-xa.
     
     //Para calcular o valor da expressão, a função avalia deve utilizar uma (pilha de execução)
 
@@ -31,7 +31,6 @@ Objeto *avalia(Fila *posFixa) {
 
     //empilhar o valor calculado.
 
-    //
 
 
     return NULL;

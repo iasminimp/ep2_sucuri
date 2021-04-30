@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
             /* A função converte a expressão em notação infix para notação pos-fixa */
             /* Para verificar se deu tudo certo, passando como argumento a opção '-e' */
             /* Quanto tudo estiver implementado, descomente as linhas abaixo */
-             Fila *posfixa = infixaParaPosfixa(filaObjetos);
+            Fila *posfixa = infixaParaPosfixa(filaObjetos);
              if (exibirNotacaoPosFixa) {
                  printf("Expressão pós-fixa: ");
                  imprimePosFixa(posfixa);

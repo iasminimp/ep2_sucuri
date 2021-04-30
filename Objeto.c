@@ -78,7 +78,7 @@ void imprimeObjeto(Objeto *obj, int tipo) {
     }
     else if (tipo == POSFIXA) {
         AVISO(Objeto.c: ainda não completei a função 'imprimeObjeto');
-        
+        //imprimeFila(posfixa, VALOR);
     }
 }
 

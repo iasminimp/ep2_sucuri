@@ -12,8 +12,11 @@ Fila *infixaParaPosfixa(Fila *infixa) {
     Fila *fila = criaFila();//Crie uma fila/lista vazia para a saída.
     Objeto *copia_objeto = NULL; //Variavel que recebe a copia do objeto
     Objeto *elemento = NULL;
-    Objeto *elemento2 = NULL;
-    int precedencia =0;
+   // Objeto *elemento2 = NULL;
+    
+    int elemento_atual = 0;
+    Objeto *elemento_top_pilha = NULL;
+    //int precedencia =0;
 
    //Examine cada objeto da fila infixa e se o objeto for:
     while(!filaVazia(infixa)){ //ou  (filaVazia(infixa) == false
@@ -31,37 +34,44 @@ Fila *infixaParaPosfixa(Fila *infixa) {
             //remover os objetos da pilha até que o abre parêntese
             //correspondente seja removido. Coloque cada operador removido na la de saída
             for(int i=0; i<tamanhoPilha(pilha);i++){
-                elemento2 = topoPilha(pilha);//referencia da Pilha
-                if(elemento2->categoria==ABRE_PARENTESES){
+                elemento_top_pilha = topoPilha(pilha);//referencia da Pilha
+                if(elemento_top_pilha->categoria==ABRE_PARENTESES){
                     desempilha(pilha);
                     break;
                 }else{//coloca na fila de saída (operadores)
-                    copia_objeto = copiaObjeto(elemento2);
+                    copia_objeto = copiaObjeto(elemento_top_pilha);
                     enqueue(fila, copia_objeto);
                     desempilha(pilha);
                 }
             }
-        }else{ //operador => insira-o na pilha.
-            precedencia = elemento->categoria;
-            elemento2 = topoPilha(pilha); //recebe o primeiro elemento
-            while (elemento2!=NULL){//percorrendo a pilha ate o final
-                //getPrecedenciaOperadores(precedencia) => ATUAL  (elemento->categoria;)
-                //getPrecedenciaOperadores(elemento2->categoria) => (sair da pilha ou não)
+        }else{ //operador
+            elemento_atual = elemento->categoria;
+            //elemento_top_pilha = topoPilha(pilha);
+/*
 
-                if(getPrecedenciaOperadores(precedencia)<=getPrecedenciaOperadores(elemento2->categoria)){
-                    copia_objeto = copiaObjeto(elemento2);
-                    enqueue(fila, copia_objeto);
-                    desempilha(pilha);//verificar: se estar removendo o elemento corretoh
-                    //garante que o elemento é o primeiro ou é o elemento CERTO
-                }
-                //elemento2 = elemento2->proximo;//pra passar para o prximo elemento               
-                copia_objeto = copiaObjeto(elemento2);
-                empilha(pilha, elemento2);
++ e - = 1
+* e / = 2
+^ e _ = 3
+
+*/
+            //while (getPrecedenciaOperadores(elemento_atual)>=getPrecedenciaOperadores(elemento_top_pilha->categoria)){
+            while (getPrecedenciaOperadores(elemento_atual)<=getPrecedenciaOperadores(elemento_top_pilha->categoria)){
+                elemento_top_pilha = topoPilha(pilha);
+                copia_objeto = copiaObjeto(elemento_top_pilha);
+                enqueue(fila, copia_objeto);
+                desempilha(pilha);//pilha fica vazia? o outro operador não é acrescentado?
             }
+            copia_objeto = copiaObjeto(elemento_top_pilha);
+            empilha(pilha, elemento_top_pilha);
         }
-        dequeue(infixa);//libera e prosegue para o proximo elemento da Fila (infixa)        
+
+        dequeue(infixa);//libera e prosegue para o proximo elemento da Fila (infixa)    
+
+        // verifique a pilha. Qualquer operador que ainda está na pilha deve ser removido e colocado na fila de saída.
     }
     //return NULL;
+
+
     return fila;
 }
 

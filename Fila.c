@@ -36,7 +36,7 @@ void enqueue(Fila *f, Objeto *o) {
     
    if(!f||!o){
        return;
-   } if(!filaVazia(f)){ /*ou (f->fim ==NULL)*/
+   } if(filaVazia(f)){ /*ou (f->fim ==NULL)*/
         f->inicio = f->fim = o;
    }else{
         f->fim->proximo = o;
@@ -114,7 +114,7 @@ void imprimeFila(Fila *f, int tipo) {
         printf("%d -> ", elem->valor);
         elem = elem->proximo;
     }
-    printf("NULL\n"); 
+   // printf("NULL\n"); 
 }
 
 /* Função de Alta Ordem que recebe uma fila e uma função (cb).

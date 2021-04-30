@@ -54,6 +54,7 @@ void dequeue(Fila *f) {
         f->inicio = f->inicio->proximo;
         f->n--;
         free(tmp);
+        //liberaObjeto(tmp);
     }
     else
         printf("ERRO: Fila vazia!\n");  

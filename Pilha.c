@@ -33,14 +33,8 @@ void liberaPilha(Pilha *p) {
 void empilha(Pilha *p, Objeto *no) { /*push*/
     //AVISO(Pilha.c: ainda não completei a função 'empilha');
 
-    if(!p||!no){
-       return;
-   } if(!pilhaVazia(p)){ /*ou (p->fim ==NULL)*/
-        p->inicio = p->fim = no;
-   }else{
-        p->fim->proximo = no;
-        p->inicio = no;
-   }
+    no->proximo = p->inicio;
+    p->inicio = no;
     p->n++;
 }
 
@@ -55,6 +49,7 @@ void desempilha(Pilha *p){ /*pop*/
         p->inicio = p->inicio->proximo;
         p->n--;//atualiza e em seguida libera, desempilha
         free(tmp);
+        //liberaObjeto(tmp);
     }
     
 }

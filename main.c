@@ -82,14 +82,14 @@ int main(int argc, char *argv[]) {
             /* TAREFA 4: implemente a função 'avalia' (Avalia.c) */
             /* A função recebe uma fila de objetos em notação pós-fixa e retorna o resultado da expressão */
             /* Quanto tudo estiver implementado, descomente as linhas abaixo */
-            // Objeto *resultado = avalia(posfixa);
-            // if (resultado){
-            //     imprimeValor(resultado);
-            //     liberaObjeto(resultado);
-            // }
+             Objeto *resultado = avalia(posfixa);
+             if (resultado){
+                 imprimeValor(resultado);
+                 liberaObjeto(resultado);
+             }
 
-            //liberaFila(posfixa);
-            //liberaFila(filaObjetos);
+            liberaFila(posfixa);
+            liberaFila(filaObjetos);
         }
 
         if (modoInterativo)

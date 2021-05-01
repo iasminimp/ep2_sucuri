@@ -21,54 +21,44 @@ Fila *criaFila() {
 void liberaFila(Fila *f) {
     //AVISO(Fila.c: ainda não completei a função 'liberaFila');   
     Objeto *auxiliar = f->inicio; 
+    Objeto *tmp;
     while(auxiliar) {
-        Objeto *tmp = auxiliar->proximo;
-        free(auxiliar);
-        auxiliar = tmp;
+        tmp = auxiliar;
+        auxiliar = auxiliar->proximo;
+        free(tmp);
     }
     free(f);
-    f = NULL;  
 }
 
 /* Insere um novo objeto a fila */
 void enqueue(Fila *f, Objeto *o) {
     //AVISO(Fila.c: ainda não completei a função 'enqueue');
-    
-   if(!f||!o){
+    if(f->inicio==NULL){// ou (filaVazia(f))
+       f->inicio =o; //ou (f->inicio=f->fim =o;)
+       f->fim = o;
+       f->n++;
        return;
-   } if(filaVazia(f)){ /*ou (f->fim ==NULL)*/
-        f->inicio = f->fim = o;
-   }else{
-        f->fim->proximo = o;
-        f->inicio = o;
    }
-
-    f->n++;
+   f->fim->proximo =o;
+   f->fim = f->fim->proximo;
+   f->n++;
 }
 
 /*Remove (apaga) o primeiro elemento da fila */
 void dequeue(Fila *f) {
     //AVISO(Fila.c: ainda não completei a função 'dequeue');   
-   if (!filaVazia(f)) {
-        Objeto *tmp = f->inicio;//fazer uma "copia"
+    if (!filaVazia(f)){
+        Objeto *tmp = f->inicio;
         f->inicio = f->inicio->proximo;
-        f->n--;
         free(tmp);
-        //liberaObjeto(tmp);
+        f->n--;
     }
-    else
-        printf("ERRO: Fila vazia!\n");  
 }
 
 /* Retorna o primeiro elemento da fila */
 Objeto *front(Fila *f) {
     //AVISO(Fila.c: ainda não completei a função 'front');
-    if(filaVazia(f)){
-        printf("ERRO: Fila vazia!");
-       return NULL;    
-    }else{
-        return f->inicio;
-    }
+    return f->inicio;
 }
 
 /* Verifica se a fila está vazia */
@@ -88,16 +78,15 @@ int tamanhoFila(Fila *f) {
 /* Retorna uma cópia da fila passada como parâmetro */
 Fila *copiaFila(Fila *f) {
     //AVISO(Fila.c: ainda não completei a função 'copiaFila');
-    if (filaVazia(f)){
-        return NULL;
+
+    Fila *copia_fila =criaFila();
+    Objeto *auxiliar = f->inicio;
+    while (auxiliar){
+        //chama a função enqueue para adicionar
+        //e a copiaObjeto para fazer a copia do objeto, nesse caso: auxiliar
+        enqueue (copia_fila, copiaObjeto(auxiliar)); 
+        auxiliar = auxiliar->proximo;
     }
-    Fila *copia_fila =NULL;
-    copia_fila = mallocSafe(sizeof(Fila));
-        
-    copia_fila -> inicio = f->inicio;
-    copia_fila -> fim = f->fim;
-    copia_fila -> n = f->n;
-    
     return copia_fila;
 }
 
@@ -106,15 +95,11 @@ Fila *copiaFila(Fila *f) {
  * Para imprimir um objeto, use a função imprimeObjeto.
  */
 void imprimeFila(Fila *f, int tipo) {
-    Objeto *elem = f->inicio;
-    while (elem!= NULL){
-        if(f!=NULL){
-            imprimeObjeto(elem, tipo);
-        }
-        printf("%d -> ", elem->valor);
-        elem = elem->proximo;
+    Objeto *elem;
+    for((elem = f->inicio); (elem->proximo != NULL); (elem = elem->proximo)){
+        imprimeObjeto(elem,tipo);
     }
-   // printf("NULL\n"); 
+    imprimeObjeto(elem,tipo);
 }
 
 /* Função de Alta Ordem que recebe uma fila e uma função (cb).
@@ -125,10 +110,17 @@ void imprimeFila(Fila *f, int tipo) {
 
 void converteElementosFila(Fila *f, void (*cb)(Objeto *)) {
     //AVISO(Fila.c: ainda não completei a função 'converteElementosFila');
-    Objeto *elem = f-> inicio;
+    /*Objeto *elem = f-> inicio;
     while (elem!= NULL){
         if(f!=NULL){
             cb(elem);//chamando a função: itemParaValor
         }
     }   
+    */
+    Objeto *elem;
+    for((elem = f->inicio); (elem->proximo != NULL); (elem = elem->proximo)){
+        cb(elem);
+    }
+    cb(elem); 
+    
 }

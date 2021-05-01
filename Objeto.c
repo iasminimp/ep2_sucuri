@@ -15,12 +15,10 @@ Objeto *criaObjeto() {
 /* Retorna uma cópia do objeto */
 Objeto *copiaObjeto(Objeto *obj) {
     //AVISO(Objeto.c: ainda não completei a função 'copiaObjeto');
-    if (obj == NULL){ //Objeto vazio
+    if (obj == NULL){ //Objeto vazio ou (!obj)
         return NULL;
     }
-    Objeto *copia_obj = NULL; //copia do objeto, recebe o VALOR do OBJ
-    copia_obj = mallocSafe(sizeof(Objeto));
- 
+    Objeto *copia_obj = criaObjeto(); //copia do objeto, recebe o VALOR do OBJ
     copia_obj->categoria = obj->categoria;
     copia_obj->proximo = obj->proximo;
 
@@ -40,19 +38,6 @@ void liberaObjeto(Objeto *o) {
         free(o->valor.pStr);*/
 //        free(o->categoria);
     free(o);   
-/*
-    while(o){
-        Objeto *tmp = o->valor;
-        if (o->valor.pStr != NULL){
-            free(o->valor.pStr);
-            o = tmp;
-        }else{
-            o = tmp;
-        }
-    }
-    free(o);
-    o = NULL;
-*/
 }
 
 /*Imprime as informação do objeto de acordo com o 'tipo' (Util.h)*/
@@ -75,10 +60,37 @@ void imprimeObjeto(Objeto *obj, int tipo) {
             /*VALOR INT*/
             printf("  %d (valor int)\n", obj->valor.vInt);
         }
-    }
-    else if (tipo == POSFIXA) {
-        AVISO(Objeto.c: ainda não completei a função 'imprimeObjeto');
-        //imprimeFila(posfixa, VALOR);
+    }else if (tipo == POSFIXA) {
+        if (obj->categoria >= 0 && obj->categoria <= 6) {
+            int elemento = obj->categoria;
+            switch(elemento){
+                case 0:
+                    printf("^ ");
+                break;
+                case 1:
+                    printf("%% ");
+                break;
+                case 2:
+                    printf("* ");
+                break;
+                case 3:
+                    printf("/ ");
+                break;
+                case 4:
+                    printf("+ ");
+                break;
+                case 5:
+                    printf("- ");
+                break;
+                case 6:
+                    printf("_ ");
+                break;
+            }
+        }else if (obj->categoria == FLOAT) {
+            printf("%lf ", obj->valor.vFloat);//Float
+        }else if (obj->categoria == INT) {
+            printf("%d ", obj->valor.vInt);//Inteiro
+        }
     }
 }
 

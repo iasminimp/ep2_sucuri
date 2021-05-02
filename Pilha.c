@@ -85,10 +85,7 @@ int tamanhoPilha(Pilha *p) {
  */
 
 void imprimePilha(Pilha *pilha, int tipo) {
-    /*if (pilha!=NULL){
-		printf("Pilha Vazia!\n");
-	    return;
-    }    */
+
     Objeto *elem=NULL;
     for((elem=pilha->inicio);(elem->proximo!=NULL);(elem=elem->proximo)){
         imprimeObjeto(elem,tipo);

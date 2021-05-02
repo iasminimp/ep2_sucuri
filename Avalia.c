@@ -18,17 +18,15 @@ Objeto *avalia(Fila *posFixa) {
     Objeto *auxiliar_1;
     Objeto *auxiliar_2;
     Objeto *out;
-
     while(fila_auxiliar!= NULL){
         int num = fila_auxiliar->categoria;
         switch(num){
-
+ /*----------------------------------------------------------------------*/ 
             case 11:
             case 12:
                 empilha(pilha, copiaObjeto(fila_auxiliar));
-            break;
-                
-
+                break;
+/*----------------------------------------------------------------------*/                
             case 6:
             auxiliar_1 = copiaObjeto(topoPilha(pilha));
             desempilha(pilha); 
@@ -45,7 +43,7 @@ Objeto *avalia(Fila *posFixa) {
             empilha(pilha,tmp);
             liberaObjeto(auxiliar_1);
             break;
-
+/*----------------------------------------------------------------------*/ 
             case 5:
                 auxiliar_1 = copiaObjeto(topoPilha(pilha));
                 desempilha(pilha);
@@ -70,7 +68,7 @@ Objeto *avalia(Fila *posFixa) {
                 liberaObjeto(auxiliar_1);
                 liberaObjeto(auxiliar_2);
             break; 
-
+/*----------------------------------------------------------------------*/ 
             case 4:
             auxiliar_1 = copiaObjeto(topoPilha(pilha));
             desempilha(pilha);
@@ -89,14 +87,13 @@ Objeto *avalia(Fila *posFixa) {
                 }else {
                     tmp->valor.vFloat = auxiliar_2->valor.vFloat + auxiliar_1->valor.vFloat;
                 }
-                tmp->categoria = 11;
-                
+                tmp->categoria = 11;         
             }
             empilha(pilha,tmp);
             liberaObjeto(auxiliar_1);
             liberaObjeto(auxiliar_2);
             break;
-            
+/*----------------------------------------------------------------------*/          
             case 3:
                 auxiliar_1 = copiaObjeto(topoPilha(pilha));
                 desempilha(pilha);
@@ -121,7 +118,7 @@ Objeto *avalia(Fila *posFixa) {
                 liberaObjeto(auxiliar_1);
                 liberaObjeto(auxiliar_2);
             break;           
-
+/*----------------------------------------------------------------------*/ 
             case 2:
                 auxiliar_1 = copiaObjeto(topoPilha(pilha));
                 desempilha(pilha);
@@ -146,7 +143,7 @@ Objeto *avalia(Fila *posFixa) {
                 liberaObjeto(auxiliar_1);
                 liberaObjeto(auxiliar_2);
             break;
-            
+/*----------------------------------------------------------------------*/            
             case 1:
                 auxiliar_1 = copiaObjeto(topoPilha(pilha));
                 desempilha(pilha);
@@ -172,7 +169,7 @@ Objeto *avalia(Fila *posFixa) {
                 liberaObjeto(auxiliar_1);
                 liberaObjeto(auxiliar_2);
             break;
-            
+/*----------------------------------------------------------------------*/             
             case 0:
                 auxiliar_1 = copiaObjeto(topoPilha(pilha));
                 desempilha(pilha);
@@ -201,7 +198,7 @@ Objeto *avalia(Fila *posFixa) {
         
         fila_auxiliar= fila_auxiliar->proximo;
     }
-
+/*---verificação da pilha ---*/ 
     out = copiaObjeto(topoPilha(pilha));
     liberaPilha(pilha);
     

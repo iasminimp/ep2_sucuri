@@ -52,12 +52,10 @@ void imprimeObjeto(Objeto *obj, int tipo) {
         else if (obj->categoria >= 9 && obj->categoria <= 10) {
             printf("  %s (%s)\n", obj->valor.pStr, getNomeCategoria(obj->categoria));
         }
-        else if (obj->categoria == FLOAT) {
-            /*VALOR FLOAT*/
+        else if (obj->categoria == FLOAT) {//valor Float
             printf("  %lf (valor float)\n", obj->valor.vFloat);
         }
-        else if (obj->categoria == INT) {
-            /*VALOR INT*/
+        else if (obj->categoria == INT) {//valor inteiro
             printf("  %d (valor int)\n", obj->valor.vInt);
         }
     }else if (tipo == POSFIXA) {

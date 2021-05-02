@@ -110,13 +110,6 @@ void imprimeFila(Fila *f, int tipo) {
 
 void converteElementosFila(Fila *f, void (*cb)(Objeto *)) {
     //AVISO(Fila.c: ainda não completei a função 'converteElementosFila');
-    /*Objeto *elem = f-> inicio;
-    while (elem!= NULL){
-        if(f!=NULL){
-            cb(elem);//chamando a função: itemParaValor
-        }
-    }   
-    */
     Objeto *elem;
     for((elem = f->inicio); (elem->proximo != NULL); (elem = elem->proximo)){
         cb(elem);

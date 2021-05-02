@@ -16,7 +16,7 @@ Fila *infixaParaPosfixa(Fila *infixa)
     Pilha *pilha = criaPilha();  //Crie uma pilha vazia para manter os operadores.
     Fila *fila = criaFila();     //Crie uma fila/lista vazia para a saída.
     Objeto *copia_objeto = NULL; //Variavel que recebe a copia do objeto
-    Objeto *elemento_top_pilha = front(infixa);
+    Objeto *elemento_top_pilha = front(infixa);//elemento que pega o primeiro elemento da fila infixa
     Objeto *elemento = NULL;
 
     while(elemento_top_pilha) {

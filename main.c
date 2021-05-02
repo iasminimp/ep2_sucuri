@@ -1,3 +1,4 @@
+/*code by: Iasmin Marques Pereira*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -73,7 +74,7 @@ int main(int argc, char *argv[]) {
             /* A função converte a expressão em notação infix para notação pos-fixa */
             /* Para verificar se deu tudo certo, passando como argumento a opção '-e' */
             /* Quanto tudo estiver implementado, descomente as linhas abaixo */
-             Fila *posfixa = infixaParaPosfixa(filaObjetos);
+            Fila *posfixa = infixaParaPosfixa(filaObjetos);
              if (exibirNotacaoPosFixa) {
                  printf("Expressão pós-fixa: ");
                  imprimePosFixa(posfixa);
@@ -82,14 +83,14 @@ int main(int argc, char *argv[]) {
             /* TAREFA 4: implemente a função 'avalia' (Avalia.c) */
             /* A função recebe uma fila de objetos em notação pós-fixa e retorna o resultado da expressão */
             /* Quanto tudo estiver implementado, descomente as linhas abaixo */
-            // Objeto *resultado = avalia(posfixa);
-            // if (resultado){
-            //     imprimeValor(resultado);
-            //     liberaObjeto(resultado);
-            // }
+             Objeto *resultado = avalia(posfixa);
+             if (resultado){
+                 imprimeValor(resultado);
+                 liberaObjeto(resultado);
+             }
 
-            //liberaFila(posfixa);
-            //liberaFila(filaObjetos);
+            liberaFila(posfixa);
+            liberaFila(filaObjetos);
         }
 
         if (modoInterativo)
